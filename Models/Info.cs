@@ -11,8 +11,10 @@ namespace MakeSense.Models
 
     public class Info
     {
-        public List<Image> Images;
-        public  List<Annotation> Annotations;
-        public List<Category> Categories;
+        public long Id { get; set; }
+        public string Description { get; set; }
+        public List<Image> Images { get; set; }
+        public  List<Annotation> Annotations { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }
