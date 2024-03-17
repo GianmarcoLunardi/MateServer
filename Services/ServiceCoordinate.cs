@@ -16,6 +16,8 @@ namespace MakeSense.Services
             BaseDati = baseDati;
         }
 
+        // Aggiunta di una riga nella tabella coordinate
+
         public Task Add(Coordinate Point)
         {
             BaseDati.Coordinates.AddAsync(Point);
