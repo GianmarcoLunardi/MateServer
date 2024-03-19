@@ -23,8 +23,9 @@ namespace MakeSense.Services
             //throw new NotImplementedException();
         }
 
-        public Task AddRangeAsync(IEnumerable<Annotation> anno)
+        public Task<int> AddRangeAsync(List<Annotation> anno)
         {
+
             throw new NotImplementedException();
         }
 
@@ -38,7 +39,7 @@ namespace MakeSense.Services
             throw new NotImplementedException();
         }
 
-        public Task<Segmentation> RemoveAsync(long id)
+        public Task<Annotation> RemoveAsync(long id)
         {
             throw new NotImplementedException();
         }

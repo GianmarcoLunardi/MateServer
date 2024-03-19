@@ -9,8 +9,8 @@ namespace MakeSense.Services.Interface
     interface IServiceAnnotation
     {
         Task AddAsync(Annotation anno);
-        Task AddRangeAsync(IEnumerable<Annotation> anno);
-        Task<Segmentation> RemoveAsync(long id);
+        Task<int> AddRangeAsync(List<Annotation> anno);
+        Task<Annotation> RemoveAsync(long id);
         Task<IEnumerable<Annotation>> GetAllAsync();
         Task<Annotation> FindAsync(long id);
         Task UpdateAsync(Annotation anno);

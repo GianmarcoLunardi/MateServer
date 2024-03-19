@@ -13,7 +13,6 @@ namespace MakeSense.Models
             [Key]
             public long Id { get; set; }
             //Punto
-            [Required]
             public float Point { get; set; }
 
     }

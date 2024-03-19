@@ -42,6 +42,7 @@ namespace MakeSense
             services.AddTransient<IServiceAnnotation, ServiceAnnotation>();
             services.AddTransient<IServiceCategory, ServiceCategory>();
             services.AddTransient<IServiceCoordinate, ServiceCoordinate>();
+            services.AddTransient<IServiceCoordinateB, ServiceCoordinateB>();
             services.AddTransient<IServiceSegmentation, ServiceSegmentation>();
 
 

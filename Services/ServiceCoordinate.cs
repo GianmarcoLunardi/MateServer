@@ -18,17 +18,23 @@ namespace MakeSense.Services
 
         // Aggiunta di una riga nella tabella coordinate
 
-        public Task Add(Coordinate Point)
+        public async  Task Add(Coordinate Point)
         {
-            BaseDati.Coordinates.AddAsync(Point);
-            BaseDati.SaveChangesAsync();
-            return Task.CompletedTask;
+            await  BaseDati.Coordinates.AddAsync(Point);
+            await  BaseDati.SaveChangesAsync();
+           // return null;//Task.CompletedTask;
            // throw new NotImplementedException();
         }
 
-        public Task AddRangeAsync(IEnumerable<Coordinate> Punti)
+        public async Task AddRangeAsync(List<Coordinate> Punti)
         {
-            throw new NotImplementedException();
+
+            await BaseDati.Coordinates.AddRangeAsync(Punti);
+            await BaseDati.SaveChangesAsync();
+           // return Task.CompletedTask;
+
+            // throw new NotImplementedException();
+
         }
 
         public Task<Coordinate> FindAsync(long id)
@@ -38,6 +44,7 @@ namespace MakeSense.Services
 
         public Task<IEnumerable<Coordinate>> GetAllAsync()
         {
+           // return await BaseDati.Coordinates;
             throw new NotImplementedException();
         }
 

@@ -9,7 +9,7 @@ namespace MakeSense.Services.Interface
     public interface IServiceCoordinate
     {
         Task Add(Coordinate Point);
-        Task AddRangeAsync(IEnumerable<Coordinate> Punti);
+        Task AddRangeAsync(List<Coordinate> Punti);
         Task<Coordinate> RemoveAsync(long id);
         Task<IEnumerable<Coordinate>> GetAllAsync();
         Task<Coordinate> FindAsync(long id);

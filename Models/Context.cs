@@ -17,8 +17,9 @@ namespace MakeSense.Models
         
       
         public DbSet<Coordinate> Coordinates { get; set; }
-        
-         public DbSet<Category> Categories { get; set; }
+        public DbSet<CoordinateB> CoordinateBs { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
          public DbSet<Annotation> Annotations { get; set; }
          public DbSet<Info> Infos { get; set; }
         
