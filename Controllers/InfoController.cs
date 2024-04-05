@@ -5,8 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MakeSense.Models;
+using MakeSense.Models.DTO.InComing;
+
 using MakeSense.Services;
 using MakeSense.Services.Interface;
+using AutoMapper;
+using MakeSense.Models.DTO.input;
 
 namespace MakeSense.Controllers
 {
@@ -17,9 +21,11 @@ namespace MakeSense.Controllers
     {
         private readonly ServiceAnnotation _Annotation;
         private readonly IServiceCoordinate _Coordinata;
-        public InfoController(IServiceCoordinate Coo)
+        private readonly IMapper _mapper;
+        public InfoController(IServiceCoordinate Coo, IMapper mapper)
         {
             _Coordinata = Coo;
+            _mapper = mapper;
         }
 
 
@@ -54,8 +60,9 @@ namespace MakeSense.Controllers
         // POST api/bookchapters
         [HttpPost]
         [Route("Add")]
-        public  IActionResult Add([FromBody] Info valore)
+        public  IActionResult Add([FromBody] CocoJsonRequest valore)
         {
+            // coccoRequest
             /*
             if (chapter == null)
              {
@@ -65,8 +72,11 @@ namespace MakeSense.Controllers
              return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
              chapter);
             */
-         /// Console.WriteLine("---------------------Entrata chiamata----------------------");
+             Console.WriteLine("---------------------Entrata chiamata----------------------");
             //_Coordinata.Add();
+
+            //_Coordinata.AddRangeAsync(valori);
+           // _Coordinata.AddRangeAsync();
             return Ok();
         }
 
@@ -89,7 +99,19 @@ namespace MakeSense.Controllers
         }
 
 
-        
+
+        // GET: InfoController/Create
+        [HttpGet]
+        public async Task<ActionResult<Annotation>> Create(annotation a)
+        {
+            Console.WriteLine("Ciaoo00");
+            var xx = _mapper.Map<Annotation>(a);
+
+            Console.WriteLine("-------->" + xx.Segmentations.Count() );
+            
+
+            return Ok();
+        }
 
 
 

@@ -13,6 +13,8 @@ using MakeSense.Models;
 using Microsoft.Data.Sqlite;
 using MakeSense.Services.Interface;
 using MakeSense.Services;
+using AutoMapper;
+
 
 namespace MakeSense
 {
@@ -44,6 +46,9 @@ namespace MakeSense
             services.AddTransient<IServiceCoordinate, ServiceCoordinate>();
             services.AddTransient<IServiceCoordinateB, ServiceCoordinateB>();
             services.AddTransient<IServiceSegmentation, ServiceSegmentation>();
+            
+            // configurazione di automapper
+            services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());
 
 
         }

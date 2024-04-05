@@ -13,8 +13,8 @@ namespace MakeSense.Models
     {
         public long Id { get; set; }
         public string Description { get; set; }
-        public List<Image> Images { get; set; }
-        public  List<Annotation> Annotations { get; set; }
-        public List<Category> Categories { get; set; }
+      // public List<Image> Images { get; set; }
+      //  public  List<Annotation> Annotations { get; set; }
+      //  public List<Category> Categories { get; set; }
     }
 }
