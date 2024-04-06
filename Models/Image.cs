@@ -11,21 +11,42 @@ namespace MakeSense.Models
     public class Image
     {
         [Key]    
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
-        [Column("File Name")]
-        public string File_Name { get; set; }
+        public string Name { get; set; }
+        public string State { get; set; }
 
+
+        public DateTime DonationBy { get; set; }
+        //public User MyProperty { get; set; }
+
+        // è il solito campo di file Name
+        //[Column("File Name")]
+        //public string File_Name { get; set; }
+
+        public string? Category { get; set; }
+        // Marca di macchina fotografica
+        public string? Brand { get; set; }
+        //Modello della macchina Fotografica
+        public string Model { get; set; }
+        //Lenti della macchina forografica
+        public string Lens { get; set; }
+        // Dati relativi al immagine
+        //grandezza
+        public int Size { get; set; }
+        // Formato
+        public string Format { get; set; }
         //Larghezza file
-        public int Width { get; set; }
-
+        //public int? Width { get; set; }
         //Altezza
-        public int Height { get; set; }
+        //public int? Height { get; set; }
+
+        //Campi Del JSON
+
+        public List<Annotation> Annotations { get; set; }
+
 
         /*
-        // Campi opzionali per futuri svolgimento del progetto
-        [Column("Id File")]
-        public long Id_File { get; set; }
 
 
         // chi fornisce l immagine
@@ -49,6 +70,6 @@ namespace MakeSense.Models
         public DateTime Assignment_date_time { get; set; }
 
         */
-     
+
     }
 }

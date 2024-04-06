@@ -32,7 +32,6 @@ namespace MakeSense.Controllers
              return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
              chapter);
             */
-            Console.WriteLine("---------------------Entrata chiamata----------------------");
             _Coordinata.Add(cod);
             return Ok();
         }
@@ -70,7 +69,7 @@ namespace MakeSense.Controllers
             */
             List<Coordinate> x = new List<Coordinate>();
 
-             var z   = valori.Select(i => new Coordinate() { Id = 0 , Point = i }).ToList();
+             var z   = valori.Select(i => new Coordinate() {  Point = i }).ToList();
             // valori.Select(i => new { id = "0", point = i });
             //  Coordinate x = valori.Select(i => new Coordinate().);
              _Coordinata.AddRangeAsync(z);

@@ -17,9 +17,10 @@ namespace MakeSense.Services
 
         public Task AddAsync(Segmentation Seg)
         {
-            BaseDati.Segmentations.AddAsync(Seg);
-            BaseDati.SaveChangesAsync();
-            return Task.CompletedTask;
+            //BaseDati.Segmentations.AddAsync(Seg);
+            //BaseDati.SaveChangesAsync();
+            //return Task.CompletedTask;
+            throw new NotImplementedException();
         }
 
         public Task AddRangeAsync(IEnumerable<Segmentation> Punti)

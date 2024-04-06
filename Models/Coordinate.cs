@@ -13,7 +13,7 @@ namespace MakeSense.Models
 
         // Chiave primariria che identifica il punto
         [Key]
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         //Punto
         [Required]
         public float Point { get; set; }

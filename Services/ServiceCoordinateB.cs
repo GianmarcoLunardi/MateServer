@@ -18,15 +18,16 @@ namespace MakeSense.Services
 
         public async Task<int> Add(CoordinateB Point)
         {
-            await BaseDati.CoordinateBs.AddAsync(Point);
-            return await BaseDati.SaveChangesAsync();
-          //  throw new NotImplementedException();
+            //await BaseDati.CoordinateBs.AddAsync(Point);
+           // return await BaseDati.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public async Task<int> AddRangeAsync(List<CoordinateB> ListaPunti)
         {
-            await BaseDati.CoordinateBs.AddRangeAsync(ListaPunti);
-            return await BaseDati.SaveChangesAsync();
+            //  await BaseDati.CoordinateBs.AddRangeAsync(ListaPunti);
+            //  return await BaseDati.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public Task<CoordinateB> FindAsync(long id)

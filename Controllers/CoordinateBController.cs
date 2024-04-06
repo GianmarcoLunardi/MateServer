@@ -33,8 +33,8 @@ namespace MakeSense.Controllers
              return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
              chapter);
             */
-            _Coordinata.AddRangeAsync(valori);
-            //_Coordinata.AddRangeAsync();
+            //_Coordinata.AddRangeAsync(valori);
+        //    //_Coordinata.AddRangeAsync();
             return Ok();
         }
 

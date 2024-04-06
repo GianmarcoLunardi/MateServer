@@ -9,7 +9,7 @@ namespace MakeSense.Models
     public class Segmentation
     {
         [Key]
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         float Point { get; set; }
     }

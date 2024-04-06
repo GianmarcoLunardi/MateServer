@@ -81,7 +81,13 @@ C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\runtimes\win-arm64\nat
 C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\BaseDati\COCOJSON.json
-C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\ref\MakeSense.dll
-C:\Users\Gianmarco\Documents\C\MakeSense\obj\Debug\net5.0\staticwebassets\MakeSense.StaticWebAssets.xml
 C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\MakeSense\angular.json
+C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\MakeSense\package-lock.json
+C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\MakeSense\package.json
+C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\MakeSense\tsconfig.app.json
+C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\MakeSense\tsconfig.json
+C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\MakeSense\tsconfig.spec.json
+C:\Users\Gianmarco\Documents\C\MakeSense\bin\Debug\net5.0\ref\MakeSense.dll
+C:\Users\Gianmarco\Documents\C\MakeSense\obj\Debug\net5.0\staticwebassets\MakeSense.StaticWebAssets.xml

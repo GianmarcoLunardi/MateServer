@@ -17,8 +17,8 @@ namespace MakeSense.Services
 
         public Task AddAsync(Annotation anno)
         {
-            BaseDati.Annotations.AddAsync(anno);
-            BaseDati.SaveChangesAsync();
+            //BaseDati.Annotations.AddAsync(anno);
+           // BaseDati.SaveChangesAsync();
             return Task.CompletedTask;
             //throw new NotImplementedException();
         }

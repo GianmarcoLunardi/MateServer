@@ -1,28 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MakeSense.Migrations
 {
-    public partial class Segmentations : Migration
+    public partial class Add_Table_Coordinate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Segmentations",
+                name: "Coordinates",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Point = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Segmentations", x => x.Id);
+                    table.PrimaryKey("PK_Coordinates", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Segmentations");
+                name: "Coordinates");
         }
     }
 }

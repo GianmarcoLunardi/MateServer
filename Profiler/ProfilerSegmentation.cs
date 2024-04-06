@@ -9,16 +9,18 @@ namespace MakeSense.Profiler
 {
     public class ProfilerSegmentation : Profile
     {
+        /*
         public ProfilerSegmentation()
         {
-            CreateMap<annotation, Annotation>()
-            .ForMember(dest => dest.Id,
+           CreateMap<annotation, Annotation>()
+           .ForMember(dest => dest.Id,
             opt => opt.MapFrom(src => src.id)
             )
             .ForMember(dest => dest.Segmentations,
 
             opt => opt.MapFrom(src => src.segmentation.Select(i => new Coordinate() { Id = 0, Point = i }).ToList()));
         }
+        */
     }
 }
 /*

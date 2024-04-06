@@ -17,9 +17,9 @@ namespace MakeSense.Services
 
         public Task AddAsync(Category cat)
         {
-            BaseDati.Categories.AddAsync(cat);
-            BaseDati.SaveChangesAsync();
-            return Task.CompletedTask;
+            //BaseDati.Categories.AddAsync(cat);
+           // BaseDati.SaveChangesAsync();
+            //return Task.CompletedTask;
             throw new NotImplementedException();
         }
 

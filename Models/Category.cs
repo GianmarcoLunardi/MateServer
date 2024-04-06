@@ -7,7 +7,7 @@ namespace MakeSense.Models
 {
     public class Category
     {
-        public long Id { get; set; }
+        public Guid id { get; set; }
         public string Name { get; set; }
     }
 }

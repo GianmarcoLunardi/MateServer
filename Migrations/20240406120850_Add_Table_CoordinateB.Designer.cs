@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MakeSense.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240305194206_Aggiungi_tabella_Prject")]
-    partial class Aggiungi_tabella_Prject
+    [Migration("20240406120850_Add_Table_CoordinateB")]
+    partial class Add_Table_CoordinateB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,26 +21,32 @@ namespace MakeSense.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MakeSense.Models.Project", b =>
+            modelBuilder.Entity("MakeSense.Models.Coordinate", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("Data");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("Name");
+                    b.Property<float>("Point")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Project");
+                    b.ToTable("Coordinates");
+                });
+
+            modelBuilder.Entity("MakeSense.Models.CoordinateB", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Point")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CoordinateB");
                 });
 #pragma warning restore 612, 618
         }
