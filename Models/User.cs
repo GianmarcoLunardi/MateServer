@@ -19,24 +19,27 @@ namespace MakeSense.Models
     public class User
     {
         [Key]
-        public long Id_User { get; set; }
-        [Column("User Mail")]
-        public string UserMail { get; set; }
-        [Column("User Name")]
-        public string UserName { get; set; }
-        [Column ("Registtration Date")]
-        public DateTime Registtration_Date { get; set; }
-        public string Surname { get; set; }
-        public  string Name { get; set; }
-        [Column("City of Residence")]
-        public String City_of_Residence { get; set;}
-        public  DateTime Date_Of_Beartg { get; set; }
-        public string Role { get; set; }
+        public Guid Id { get; set; }
+        public int Prog { get; set; }
+        
+       
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string city { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+
+        public DateTime Submitted { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        [Column("University Work")]
-        public string University_Work { get; set; }
-        
+
+        public Role Role { get; set; }
+        public DateTime ApprovedOn { get; set; }
+
+        // Attenzione può generare un riferimento circolare
+        //public User ApprovedBy { get; set; }
+
 
 
     }

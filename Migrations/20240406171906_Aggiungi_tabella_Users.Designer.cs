@@ -4,14 +4,16 @@ using MakeSense.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MakeSense.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240406171906_Aggiungi_tabella_Users")]
+    partial class Aggiungi_tabella_Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,74 +102,6 @@ namespace MakeSense.Migrations
                     b.ToTable("CoordinateB");
                 });
 
-            modelBuilder.Entity("MakeSense.Models.Image", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DonationBy")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Format")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lens")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UpdatedById")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UpdatedById");
-
-                    b.ToTable("Image");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.Label", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Highth")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ImageIdId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Width")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageIdId");
-
-                    b.ToTable("Labels");
-                });
-
             modelBuilder.Entity("MakeSense.Models.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -252,24 +186,6 @@ namespace MakeSense.Migrations
                     b.HasOne("MakeSense.Models.Annotation", null)
                         .WithMany("Bbox")
                         .HasForeignKey("AnnotationId");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.Image", b =>
-                {
-                    b.HasOne("MakeSense.Models.User", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
-
-                    b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.Label", b =>
-                {
-                    b.HasOne("MakeSense.Models.Image", "ImageId")
-                        .WithMany()
-                        .HasForeignKey("ImageIdId");
-
-                    b.Navigation("ImageId");
                 });
 
             modelBuilder.Entity("MakeSense.Models.User", b =>

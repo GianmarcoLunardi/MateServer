@@ -4,14 +4,16 @@ using MakeSense.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MakeSense.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240406172744_Update_tabella_Image_UpdateBy")]
+    partial class Update_tabella_Image_UpdateBy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,31 +145,6 @@ namespace MakeSense.Migrations
                     b.ToTable("Image");
                 });
 
-            modelBuilder.Entity("MakeSense.Models.Label", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Highth")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ImageIdId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Width")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageIdId");
-
-                    b.ToTable("Labels");
-                });
-
             modelBuilder.Entity("MakeSense.Models.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -261,15 +238,6 @@ namespace MakeSense.Migrations
                         .HasForeignKey("UpdatedById");
 
                     b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.Label", b =>
-                {
-                    b.HasOne("MakeSense.Models.Image", "ImageId")
-                        .WithMany()
-                        .HasForeignKey("ImageIdId");
-
-                    b.Navigation("ImageId");
                 });
 
             modelBuilder.Entity("MakeSense.Models.User", b =>

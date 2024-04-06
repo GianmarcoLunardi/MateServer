@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MakeSense.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240406120850_Add_Table_CoordinateB")]
-    partial class Add_Table_CoordinateB
+    [Migration("20240406164555_Aggiungi_tabella_coordinateB")]
+    partial class Aggiungi_tabella_coordinateB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,20 @@ namespace MakeSense.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MakeSense.Models.Category", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("MakeSense.Models.Coordinate", b =>
                 {

@@ -43,9 +43,10 @@ namespace MakeSense.Models
 
         //Campi Del JSON
 
-        public List<Annotation> Annotations { get; set; }
+        //campo chiave esterna
+        //public List<Annotation> Annotations { get; set; }
 
-
+        public User UpdatedBy { get; set; }
         /*
 
 

@@ -9,7 +9,9 @@ namespace MakeSense.Models
     public class Label
     {
         public Guid Id { get; set; }
-        public Image ImageId  { get; set; }
+
+        public string LabelImage { get; set; } 
+        //public Image ImageId  { get; set; }
         public User LabeledBy { get; set; }
         public string Name { get; set; }
         public int Width { get; set; }

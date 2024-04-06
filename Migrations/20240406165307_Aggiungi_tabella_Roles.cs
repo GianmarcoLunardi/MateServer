@@ -3,27 +3,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MakeSense.Migrations
 {
-    public partial class Add_Table_Coordinate : Migration
+    public partial class Aggiungi_tabella_Roles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Coordinates",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Point = table.Column<float>(type: "real", nullable: false)
+                    TypeCode = table.Column<int>(type: "int", nullable: false),
+                    ShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Coordinates", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Coordinates");
+                name: "Roles");
         }
     }
 }

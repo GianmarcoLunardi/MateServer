@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MakeSense.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240406120514_Add_Table_Coordinate")]
-    partial class Add_Table_Coordinate
+    [Migration("20240406164441_Aggiungi_tabella_coordinate")]
+    partial class Aggiungi_tabella_coordinate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,20 @@ namespace MakeSense.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MakeSense.Models.Category", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("MakeSense.Models.Coordinate", b =>
                 {
@@ -33,6 +47,20 @@ namespace MakeSense.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Coordinates");
+                });
+
+            modelBuilder.Entity("MakeSense.Models.CoordinateB", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Point")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CoordinateB");
                 });
 #pragma warning restore 612, 618
         }
