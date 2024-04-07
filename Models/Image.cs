@@ -17,7 +17,7 @@ namespace MakeSense.Models
         public string State { get; set; }
 
 
-        public DateTime DonationBy { get; set; }
+        public DateTime DonationOn { get; set; }
         //public User MyProperty { get; set; }
 
         // è il solito campo di file Name
@@ -37,40 +37,13 @@ namespace MakeSense.Models
         // Formato
         public string Format { get; set; }
         //Larghezza file
-        //public int? Width { get; set; }
-        //Altezza
-        //public int? Height { get; set; }
-
-        //Campi Del JSON
 
         //campo chiave esterna
         //public List<Annotation> Annotations { get; set; }
 
-        public User UpdatedBy { get; set; }
-        /*
-
-
-        // chi fornisce l immagine
-
-        [Column("Donator Id")]
-        public long Donator_ID { get; set; }
-        // La persona che ha itechittato l immagine
+        //public User UpdatedBy { get; set; }
        
-        [Column("Labeled Id")]
-        public int Labelled_ID_User { get; set; }
 
-        // Lente con cui è stato fotografato
-        public string Lens { get; set; }
-
-        // Marca Macchina Fotografica
-        public string Brend { get; set; }
-
-        // Modello Macchina Forografica
-        public int Brand { get; set; }
-        [Column("Assignment date time")]
-        public DateTime Assignment_date_time { get; set; }
-
-        */
 
     }
 }
