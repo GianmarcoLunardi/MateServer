@@ -20,20 +20,20 @@ namespace MakeSense.Services
 
         public async  Task Add(Coordinate Point)
         {
-            await  BaseDati.Coordinates.AddAsync(Point);
-            await  BaseDati.SaveChangesAsync();
+           // await  BaseDati.Coordinates.AddAsync(Point);
+           // await  BaseDati.SaveChangesAsync();
            // return null;//Task.CompletedTask;
-           // throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
         public async Task AddRangeAsync(List<Coordinate> Punti)
         {
 
-            await BaseDati.Coordinates.AddRangeAsync(Punti);
-            await BaseDati.SaveChangesAsync();
+           // await BaseDati.Coordinates.AddRangeAsync(Punti);
+           // await BaseDati.SaveChangesAsync();
            // return Task.CompletedTask;
 
-            // throw new NotImplementedException();
+             throw new NotImplementedException();
 
         }
 

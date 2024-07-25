@@ -15,14 +15,14 @@ using System.Threading.Tasks;
  */
 namespace MakeSense.Models
 {
-    [Table("user")]
+    [Table("users")]
     public class User
     {
         [Key]
         public Guid Id { get; set; }
-        public int Prog { get; set; }
+
         
-       
+      
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
@@ -30,17 +30,23 @@ namespace MakeSense.Models
         public string State { get; set; }
         public string Country { get; set; }
 
-        public DateTime Submitted { get; set; }
+        public DateTime SubmittedDate { get; set; }
+        public string JobSection { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-
-        public Role Role { get; set; }
+        public string Password { get; set; }
+        
         public DateTime ApprovedOn { get; set; }
 
+        public ICollection<Image> ImagesAproved { get; } = new List<Image>();
+
+
+
         // Attenzione può generare un riferimento circolare
-        //public User ApprovedBy { get; set; }
 
-
+        public List<User> ApprovedBy { get; set; }
+        
+        List<Registry> registries { get; set; }
 
     }
 }

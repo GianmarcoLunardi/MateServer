@@ -12,21 +12,100 @@ using MakeSense.Services.Interface;
 using AutoMapper;
 using MakeSense.Models.DTO.input;
 
+using System.Text.Json;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
+
 namespace MakeSense.Controllers
 {
     [ApiController]
-
     [Route("api/[controller]")]
     public class InfoController : ControllerBase
     {
+        private readonly Context BaseDati;
         private readonly ServiceAnnotation _Annotation;
         private readonly IServiceCoordinate _Coordinata;
         private readonly IMapper _mapper;
-        public InfoController(IServiceCoordinate Coo, IMapper mapper)
+        public InfoController(IServiceCoordinate Coo, IMapper mapper, Context _BasiDati)
         {
             _Coordinata = Coo;
             _mapper = mapper;
+            BaseDati = _BasiDati;
         }
+
+        [HttpPost]
+        [Route("uploadJson")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpJson(IFormFile file)
+        {
+            //Info info = JsonSerializer.deserializer(file);
+            //Root root = JsonSerializer.Deserialize<Root>(file.ToString());
+
+            //file.OpenReadStream();
+
+
+            //  riguardare
+            Random random = new Random();
+            int id = random.Next();
+            string NomeFile = id.ToString();
+             NomeFile = NomeFile + Path.GetExtension(file.FileName);
+
+
+             // Salvataggio Del File
+             string path = Path.Combine(Directory.GetCurrentDirectory(), "Json");
+             using FileStream stram = new FileStream(Path.Combine(path, NomeFile), FileMode.Create);
+
+            Root root = new Root();
+            await JsonSerializer.SerializeAsync(stram, root);
+
+           // Console.WriteLine(File.ReadAllText(fileName));
+
+            //Da  aggiungere
+            //  file.CopyTo(stram);
+
+
+            //this.NomeFileImmagine = NomeFile;
+            /*
+             using (StreamReader reader = new StreamReader(stram))
+             {
+                 string text = reader.ReadToEnd();
+                 // 'text' now contains the contents of the stream as a string
+             }
+
+             StreamReader reader = new StreamReader(stram);
+                 string text = reader.ReadToEnd();
+                */
+            // "id": "bc58bc5c-cc3c-4c2e-87eb-002ba689b083
+
+
+            // Per la Desiarilizzazione
+            //string fileJson = "{ \"description\": \"variabile\"}";
+            //Root root = JsonSerializer.Deserialize<Root>(fileJson);
+            Console.WriteLine("---------------------Entrata chiamata----------------------");
+           //  Console.WriteLine(stram.ToString());
+           // Console.WriteLine(fileJson);
+            Console.WriteLine("Oggetto");
+          //  Console.WriteLine(root.description);
+
+            Console.WriteLine("File");
+           // Console.WriteLine(stram.ToString());
+
+            return Ok();
+        }
+
+
+        // Getall api/info
+        [HttpGet]
+        [Route("All")]
+        public IActionResult All()
+        {
+            var x = BaseDati.roots.Include(x => x.images);
+           
+            Console.WriteLine("---------------------Entrata chiamata----------------------");
+           // _Coordinata.Add(cod);
+            return Ok( x );
+        }
+
 
 
         /*
@@ -36,24 +115,9 @@ namespace MakeSense.Controllers
         services.AddTransient<IServiceSegmentation, ServiceSegmentation>(); 
          */
 
-        // POST api/info
-        [HttpPost]
-       [Route("Coordinata/Add")]
-        public IActionResult Add([FromBody] Coordinate cod)
-        {
-            /*
-            if (chapter == null)
-             {
-                 return BadRequest();
-             }
-             _bookChaptersService.Add(chapter);
-             return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
-             chapter);
-            */
-            Console.WriteLine("---------------------Entrata chiamata----------------------");
-            _Coordinata.Add(cod);
-            return Ok();
-        }
+    
+
+
 
 
 
@@ -62,21 +126,9 @@ namespace MakeSense.Controllers
         [Route("Add")]
         public  IActionResult Add([FromBody] CocoJsonRequest valore)
         {
-            // coccoRequest
-            /*
-            if (chapter == null)
-             {
-                 return BadRequest();
-             }
-             _bookChaptersService.Add(chapter);
-             return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
-             chapter);
-            */
-             Console.WriteLine("---------------------Entrata chiamata----------------------");
-            //_Coordinata.Add();
 
-            //_Coordinata.AddRangeAsync(valori);
-           // _Coordinata.AddRangeAsync();
+             Console.WriteLine("---------------------Entrata chiamata----------------------");
+
             return Ok();
         }
 
@@ -107,7 +159,7 @@ namespace MakeSense.Controllers
             Console.WriteLine("Ciaoo00");
             var xx = _mapper.Map<Annotation>(a);
 
-            Console.WriteLine("-------->" + xx.Segmentations.Count() );
+          //  Console.WriteLine("-------->" + xx.Segmentations.Count() );
             
 
             return Ok();

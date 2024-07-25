@@ -14,6 +14,8 @@ using Microsoft.Data.Sqlite;
 using MakeSense.Services.Interface;
 using MakeSense.Services;
 using AutoMapper;
+using System.Reflection;
+using Microsoft.AspNetCore.Cors;
 
 
 namespace MakeSense
@@ -30,8 +32,11 @@ namespace MakeSense
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-         //    string stringaDiConnessione = Configuration["ConnectionStrings:sqlite"];
-        //     services.AddDbContext<Context>(opt => opt.UseSqlite(stringaDiConnessione));
+            //    covenzione su j aosn));
+
+
+
+           
             string stringaDiConnessione = Configuration["ConnectionStrings:sqlserver"];
             services.AddDbContext<Context>(opt => opt.UseSqlServer(stringaDiConnessione));
             services.AddControllers();
@@ -41,12 +46,29 @@ namespace MakeSense
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MakeSense", Version = "v1" });
             });
 
+
+            //DI Dei Servizi....
+
             services.AddTransient<IServiceAnnotation, ServiceAnnotation>();
             services.AddTransient<IServiceCategory, ServiceCategory>();
             services.AddTransient<IServiceCoordinate, ServiceCoordinate>();
             services.AddTransient<IServiceCoordinateB, ServiceCoordinateB>();
             services.AddTransient<IServiceSegmentation, ServiceSegmentation>();
-            
+            services.AddTransient<IServiceUtente, ServiceUser>();
+
+            // configurazione di automapper
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddTransient<IServiceImage, ServiceImage>();
+            // aggiungere il servizio cors
+            services.AddCors(options =>
+                options.AddPolicy(name: "AngularPolicy",
+                    cfg => {
+                    cfg.AllowAnyHeader();
+                    cfg.AllowAnyMethod();
+                    cfg.WithOrigins(Configuration["AllowedCORS"]);
+                }));
+            //services.AddCors();
             // configurazione di automapper
             services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());
 
@@ -64,16 +86,35 @@ namespace MakeSense
               app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MakeSense v1"));
             }
 
+            //app.UseCors(c => c.AllowAnyOrigin());
+            app.UseCors("AngularPolicy");
+            
 
+            // aggiuto da manuale
+            app.UseStaticFiles();
 
-            app.UseRouting();
 
             app.UseAuthorization();
 
+
+            //https://www.youtube.com/watch?v=MOVOHHFSCRI
+
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
+
+
+                endpoints.MapControllerRoute(
+                name: "default",
+                 pattern: " { controller}/{action}/{id?}/{id2?}");
+
+
+               
             });
         }
     }
 }
+
+
+//

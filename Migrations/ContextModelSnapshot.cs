@@ -19,92 +19,14 @@ namespace MakeSense.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MakeSense.Models.Annotation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<float?>("Area")
-                        .HasColumnType("real");
-
-                    b.Property<string>("bbbox_string")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("category_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("image_id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("iscrowd")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("segmentation_text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Annotations");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.Category", b =>
-                {
-                    b.Property<Guid>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.Coordinate", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("AnnotationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<float>("Point")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnnotationId");
-
-                    b.ToTable("Coordinates");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.CoordinateB", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("AnnotationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<float>("Point")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnnotationId");
-
-                    b.ToTable("CoordinateB");
-                });
-
             modelBuilder.Entity("MakeSense.Models.Image", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ApprovedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
@@ -112,8 +34,14 @@ namespace MakeSense.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DonationBy")
+                    b.Property<string>("DonationBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DonationOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("File_Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Format")
                         .HasColumnType("nvarchar(max)");
@@ -127,18 +55,29 @@ namespace MakeSense.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Size")
+                    b.Property<int?>("PixelX")
                         .HasColumnType("int");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("PixelY")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("UpdatedById")
+                    b.Property<long?>("RootId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("Size")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("User")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UpdatedById");
+                    b.HasIndex("RootId");
+
+                    b.HasIndex("User");
 
                     b.ToTable("Image");
                 });
@@ -152,8 +91,11 @@ namespace MakeSense.Migrations
                     b.Property<int>("Highth")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ImageIdId")
+                    b.Property<Guid>("IdImage")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LabelImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -163,9 +105,38 @@ namespace MakeSense.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageIdId");
+                    b.HasIndex("IdImage")
+                        .IsUnique();
 
                     b.ToTable("Labels");
+                });
+
+            modelBuilder.Entity("MakeSense.Models.Registry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Operation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RegistratedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("Registries");
                 });
 
             modelBuilder.Entity("MakeSense.Models.Role", b =>
@@ -191,6 +162,21 @@ namespace MakeSense.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("MakeSense.Models.Root", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("roots");
+                });
+
             modelBuilder.Entity("MakeSense.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -212,14 +198,17 @@ namespace MakeSense.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("JobSection")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Prog")
-                        .HasColumnType("int");
 
                     b.Property<Guid?>("RoleId")
                         .HasColumnType("uniqueidentifier");
@@ -227,8 +216,11 @@ namespace MakeSense.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Submitted")
+                    b.Property<DateTime>("SubmittedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
@@ -237,55 +229,79 @@ namespace MakeSense.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("user");
-                });
+                    b.HasIndex("UserId");
 
-            modelBuilder.Entity("MakeSense.Models.Coordinate", b =>
-                {
-                    b.HasOne("MakeSense.Models.Annotation", null)
-                        .WithMany("Segmentations")
-                        .HasForeignKey("AnnotationId");
-                });
-
-            modelBuilder.Entity("MakeSense.Models.CoordinateB", b =>
-                {
-                    b.HasOne("MakeSense.Models.Annotation", null)
-                        .WithMany("Bbox")
-                        .HasForeignKey("AnnotationId");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("MakeSense.Models.Image", b =>
                 {
-                    b.HasOne("MakeSense.Models.User", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
+                    b.HasOne("MakeSense.Models.Root", null)
+                        .WithMany("images")
+                        .HasForeignKey("RootId");
 
-                    b.Navigation("UpdatedBy");
+                    b.HasOne("MakeSense.Models.User", "ApprovedBy")
+                        .WithMany("ImagesAproved")
+                        .HasForeignKey("User");
+
+                    b.Navigation("ApprovedBy");
                 });
 
             modelBuilder.Entity("MakeSense.Models.Label", b =>
                 {
-                    b.HasOne("MakeSense.Models.Image", "ImageId")
-                        .WithMany()
-                        .HasForeignKey("ImageIdId");
+                    b.HasOne("MakeSense.Models.Image", "Image")
+                        .WithOne("Label")
+                        .HasForeignKey("MakeSense.Models.Label", "IdImage")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ImageId");
+                    b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("MakeSense.Models.Registry", b =>
+                {
+                    b.HasOne("MakeSense.Models.Image", "Image")
+                        .WithMany("Registries")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("MakeSense.Models.User", b =>
                 {
-                    b.HasOne("MakeSense.Models.Role", "Role")
-                        .WithMany()
+                    b.HasOne("MakeSense.Models.Role", null)
+                        .WithMany("User")
                         .HasForeignKey("RoleId");
 
-                    b.Navigation("Role");
+                    b.HasOne("MakeSense.Models.User", null)
+                        .WithMany("ApprovedBy")
+                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("MakeSense.Models.Annotation", b =>
+            modelBuilder.Entity("MakeSense.Models.Image", b =>
                 {
-                    b.Navigation("Bbox");
+                    b.Navigation("Label");
 
-                    b.Navigation("Segmentations");
+                    b.Navigation("Registries");
+                });
+
+            modelBuilder.Entity("MakeSense.Models.Role", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MakeSense.Models.Root", b =>
+                {
+                    b.Navigation("images");
+                });
+
+            modelBuilder.Entity("MakeSense.Models.User", b =>
+                {
+                    b.Navigation("ApprovedBy");
+
+                    b.Navigation("ImagesAproved");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ using MakeSense.Models;
 
 namespace MakeSense.Services.Interface
 {
-    interface IServiceCategory
+  public  interface IServiceCategory
     {
         Task AddAsync(Category cat);
         Task AddRangeAsync(IEnumerable<Category> Cat);

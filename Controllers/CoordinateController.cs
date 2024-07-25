@@ -18,20 +18,12 @@ namespace MakeSense.Controllers
         {
             _Coordinata = coordinata;
         }
-
+        /*
         [HttpPost]
         [Route("Add")]
         public IActionResult Add([FromBody] Coordinate cod)
         {
-            /*
-            if (chapter == null)
-             {
-                 return BadRequest();
-             }
-             _bookChaptersService.Add(chapter);
-             return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
-             chapter);
-            */
+
             _Coordinata.Add(cod);
             return Ok();
         }
@@ -40,17 +32,9 @@ namespace MakeSense.Controllers
         [Route("AddRange")]
         public async Task<IActionResult> AddRange([FromBody] List<Coordinate> valori)
         {
-            /*
-            if (chapter == null)
-             {
-                 return BadRequest();
-             }
-             _bookChaptersService.Add(chapter);
-             return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
-             chapter);
-            */
+     
             _Coordinata.AddRangeAsync(valori);
-            // _Coordinata.AddRangeAsync();
+          
             return Ok();
         }
 
@@ -58,15 +42,7 @@ namespace MakeSense.Controllers
         [Route("AddRangeArray")]
         public async Task<IActionResult> AddRange([FromBody] List<float> valori)
         {
-            /*
-            if (chapter == null)
-             {
-                 return BadRequest();
-             }
-             _bookChaptersService.Add(chapter);
-             return CreatedAtRoute(nameof(GetBookChapterById), new { id = chapter.Id },
-             chapter);
-            */
+
             List<Coordinate> x = new List<Coordinate>();
 
              var z   = valori.Select(i => new Coordinate() {  Point = i }).ToList();
@@ -84,6 +60,6 @@ namespace MakeSense.Controllers
             return null;
         }
 
-
+        */
     }
 }
