@@ -11,6 +11,7 @@ namespace MakeSense.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class CoordinateBController : ControllerBase
     {
         private readonly IServiceCoordinateB _Coordinata;
