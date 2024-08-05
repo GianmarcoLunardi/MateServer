@@ -50,9 +50,18 @@ public IEnumerable<string> Get()
             return Ok();
         }
 
+        /// <summary>
+        /// Restitutisce una colleziobe di oggetti immagine
+        /// </summary>
+        /// <remarks>Awesomeness!</remarks>
+        /// <response code="200">Product created</response>
+        /// <response code="400">Product has missing/invalid values</response>
+        /// <response code="500">Oops! Can't create your product right now</response>
+
+
         [HttpGet]
         [Route("List")]
-        public async Task<IActionResult> List()
+         public async Task<IActionResult> List()
         {
             
             return Ok( await service.ListAsyn());
@@ -107,7 +116,7 @@ public IEnumerable<string> Get()
         }
 
         /// <summary>
-        /// ///
+        /// Re
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -116,6 +125,8 @@ public IEnumerable<string> Get()
 
         [HttpGet]
         [Route("GetFotoApproved/{id}/{id2}")]
+        [ProducesResponseType(200)]
+
         public async Task<IActionResult> GetFotoAproved(Guid id , 
             Guid  id2 )
         {
@@ -152,8 +163,6 @@ public IEnumerable<string> Get()
 
 
 
-
-        //// ?<<<<??
         [HttpGet]
         [Route("GetFotoDetai/{id}")]
         public async Task<IActionResult> GetFotoDeta(Guid id)
@@ -235,12 +244,14 @@ public IEnumerable<string> Get()
 
         [Consumes("multipart/form-data")]
         [HttpPost]
-        [Route("UploadFile")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [Route("UploadJson")]
         public async Task<IActionResult> UploadFileProva25(IFormFile json )
         {
+            await service.UploadJson(json);
 
 
-            // Console.WriteLine(" chiamato il post di prova  <--------" );
+
             // ImageIn x = new ImageIn();
             // x.File = Immagine;
             //  string FileSalvato = await service.UploadFileMulti(x);
@@ -330,16 +341,6 @@ public IEnumerable<string> Get()
 
 
 
-        // PUT api/<ImageController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<ImageController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

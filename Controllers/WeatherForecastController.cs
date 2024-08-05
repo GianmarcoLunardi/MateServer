@@ -6,8 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace MakeSense.Controllers
-{/*
+{
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
@@ -35,5 +36,5 @@ namespace MakeSense.Controllers
             })
             .ToArray();
         }
-    } */
+    } 
 }

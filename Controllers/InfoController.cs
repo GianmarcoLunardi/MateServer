@@ -26,11 +26,16 @@ namespace MakeSense.Controllers
         private readonly ServiceAnnotation _Annotation;
         private readonly IServiceCoordinate _Coordinata;
         private readonly IMapper _mapper;
-        public InfoController(IServiceCoordinate Coo, IMapper mapper, Context _BasiDati)
+        private readonly IServiceInfo ServiceInfo;
+
+        public InfoController(IServiceCoordinate Coo, IMapper mapper, 
+            IServiceInfo _ServiceInfo,
+            Context _BasiDati)
         {
             _Coordinata = Coo;
             _mapper = mapper;
             BaseDati = _BasiDati;
+            ServiceInfo = _ServiceInfo;
         }
 
         [HttpPost]
@@ -38,64 +43,16 @@ namespace MakeSense.Controllers
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UpJson(IFormFile file)
         {
-            //Info info = JsonSerializer.deserializer(file);
-            //Root root = JsonSerializer.Deserialize<Root>(file.ToString());
-
-            //file.OpenReadStream();
 
 
-            //  riguardare
-            Random random = new Random();
-            int id = random.Next();
-            string NomeFile = id.ToString();
-             NomeFile = NomeFile + Path.GetExtension(file.FileName);
-
-
-             // Salvataggio Del File
-             string path = Path.Combine(Directory.GetCurrentDirectory(), "Json");
-             using FileStream stram = new FileStream(Path.Combine(path, NomeFile), FileMode.Create);
-
-            Root root = new Root();
-            await JsonSerializer.SerializeAsync(stram, root);
-
-           // Console.WriteLine(File.ReadAllText(fileName));
-
-            //Da  aggiungere
-            //  file.CopyTo(stram);
-
-
-            //this.NomeFileImmagine = NomeFile;
-            /*
-             using (StreamReader reader = new StreamReader(stram))
-             {
-                 string text = reader.ReadToEnd();
-                 // 'text' now contains the contents of the stream as a string
-             }
-
-             StreamReader reader = new StreamReader(stram);
-                 string text = reader.ReadToEnd();
-                */
-            // "id": "bc58bc5c-cc3c-4c2e-87eb-002ba689b083
-
-
-            // Per la Desiarilizzazione
-            //string fileJson = "{ \"description\": \"variabile\"}";
-            //Root root = JsonSerializer.Deserialize<Root>(fileJson);
-            Console.WriteLine("---------------------Entrata chiamata----------------------");
-           //  Console.WriteLine(stram.ToString());
-           // Console.WriteLine(fileJson);
-            Console.WriteLine("Oggetto");
-          //  Console.WriteLine(root.description);
-
-            Console.WriteLine("File");
-           // Console.WriteLine(stram.ToString());
-
+            await ServiceInfo.UploadJson(file);
             return Ok();
         }
 
 
         // Getall api/info
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("All")]
         public IActionResult All()
         {
@@ -154,6 +111,7 @@ namespace MakeSense.Controllers
 
         // GET: InfoController/Create
         [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult<Annotation>> Create(annotation a)
         {
             Console.WriteLine("Ciaoo00");

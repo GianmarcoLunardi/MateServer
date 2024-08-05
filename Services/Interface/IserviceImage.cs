@@ -27,6 +27,8 @@ namespace MakeSense.Services.Interface
         ///Task<Image> GetFotoDetal(Guid id);
         Task<string> GetNameFoto(Guid id);
 
+
+        public Task UploadJson(IFormFile file);
     }
 }
 

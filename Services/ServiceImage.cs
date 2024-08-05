@@ -19,6 +19,8 @@ namespace MakeSense.Services
 
         private string NomeFileImmagine="" ;
 
+        static int contatore = 0;
+
         public ServiceImage(Context baseDati)
         {
             BaseDati = baseDati;
@@ -208,8 +210,8 @@ if              (!ValidExtention.Contains(extention)){
                         //NomeFile = 
                         // percorso file
                     string path = Path.Combine(Directory.GetCurrentDirectory(), "Foto");
-                    using FileStream stram = new FileStream(Path.Combine (path , NomeFile), FileMode.Create);
-                    file.CopyTo(stram);
+            using (FileStream stram = new FileStream(Path.Combine(path, NomeFile), FileMode.Create))
+                    { file.CopyTo(stram); }
                     Console.WriteLine("------Ci siamooooooo-----File Copiato " + path+NomeFile);
                     return NomeFile;
 //throw new NotImplementedException();
@@ -227,6 +229,40 @@ if              (!ValidExtention.Contains(extention)){
             foto.State = _State.Approved;
 
             await BaseDati.SaveChangesAsync();
+
+        }
+
+        public async Task UploadJson(IFormFile file) 
+        {
+            Console.WriteLine("Siamo dentro l inseriemento dell upload json");
+            Console.WriteLine(file.FileName);
+
+            contatore++;
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(),"CocoDirectory" , "coco" + contatore + ".json");
+
+            Console.WriteLine(path);
+
+            using (FileStream stram = new FileStream(path, FileMode.Create))
+            { file.CopyTo(stram); }
+
+            // il file prima di essere utilizzato va salavato su una directory poi va riaperto
+
+            // string StringaFile = File.ReadAllText(@"C:\Users\Gianmarco\Documents\C\MakeSense\CocoDirectory\coco1.json");
+            Console.WriteLine(path);
+            string StringaFile = File.ReadAllText(path);
+            // string StringaFile = File.ReadAllText(file.FileName);
+
+            // Console.WriteLine(path);
+            /*
+           
+            string[] linee = File.ReadAllLines(path);
+            
+                       foreach( string lineaJson in linee)
+                       { Console.WriteLine(lineaJson);  }
+            */
+
+            Console.WriteLine(StringaFile);
 
         }
 

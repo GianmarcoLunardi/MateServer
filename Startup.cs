@@ -54,6 +54,7 @@ namespace MakeSense
             services.AddTransient<IServiceCoordinate, ServiceCoordinate>();
             services.AddTransient<IServiceCoordinateB, ServiceCoordinateB>();
             services.AddTransient<IServiceSegmentation, ServiceSegmentation>();
+            services.AddTransient<IServiceInfo, ServiceInfo>();
             services.AddTransient<IServiceUtente, ServiceUser>();
 
             // configurazione di automapper
@@ -83,7 +84,7 @@ namespace MakeSense
             {
               app.UseDeveloperExceptionPage();
               app.UseSwagger();
-              app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MakeSense v1"));
+              app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mate2Tag v1"));
             }
 
             //app.UseCors(c => c.AllowAnyOrigin());
