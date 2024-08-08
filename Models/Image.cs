@@ -40,8 +40,7 @@ namespace MakeSense.Models
  
 
 
-        // Da aggiungere come relazione
-        //public DateTimr ApprovedBy { get; set; }
+
 
 
 
@@ -71,11 +70,9 @@ namespace MakeSense.Models
 
         public Label Label { get; set; }
 
+
+
         public DateTime? DonationOn { get; set; }
-
-
-        //public string? DonationBy { get; set; }
-
         public string? DonationBy { get; set; }
 
 
@@ -83,13 +80,17 @@ namespace MakeSense.Models
 
 
         public DateTime ApprovedOn { get; set; }
+        // Da aggiungere come relazione
+
+
 
         // Prima era una stringa
 
 
         [ForeignKey("User")]
         //public Guid IdUser { get; set; } // Required foreign key property
-        public User ApprovedBy { get; set; } = null!; // Required reference navigation to principal
+        public Guid? IUserId { get; set; }
+        public User? ApprovedBy { get; set; } = null!; // Required reference navigation to principal
 
         public List<Registry> Registries { get; set; }
 

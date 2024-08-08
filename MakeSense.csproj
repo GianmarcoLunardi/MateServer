@@ -32,8 +32,9 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="img\" />
-    <Folder Include="Foto\" />
     <Folder Include="Json\" />
+    <Folder Include="CocoDirectory\" />
+    <Folder Include="Foto\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" basedati_4cocojson_1json__JsonSchema="https://api.airplane.dev/v0/schemas/task.json" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

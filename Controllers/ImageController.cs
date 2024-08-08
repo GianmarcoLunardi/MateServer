@@ -61,10 +61,10 @@ public IEnumerable<string> Get()
 
         [HttpGet]
         [Route("List")]
-         public async Task<IActionResult> List()
+         public IActionResult List()
         {
             
-            return Ok( await service.ListAsyn());
+            return Ok( service.List());
         }
 
 
@@ -273,70 +273,42 @@ public IEnumerable<string> Get()
         [Route("UploadFoto")] 
         public async Task<IActionResult> UploadFile(
             [FromForm] ImageIn request
-            // [FromForm] ImageIn request
+
             )
         {
-            // aggiungo il file alla directory e lo salvo.
-            // poi prendo il nome.
+
+            // https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0
 
 
+           
 
-            // Image x = new Image();
-            //IFormFile file = null; // rigurdare;
-            // Manuale sul controllo dati
-            //https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-8.0
-            //   string controllo = await service.UploadFile(file);
-            // IFormFile c, string descrizione
-            // UploadRequestFile Immagine,
-
-            // controlla 
-
-
-            // cambia nome
-            // oral_img-20240111-1206-2_Alber􀆟_Beatrice_DL-Nikon-3300-105mm
-            // string NomeFile = "Foto" + Guid.NewGuid().ToString() + extention;
-            // Nel nome file manca da inserire i dati del login 
-            /*
-            string NomeFile = "oral_img-";
-            NomeFile = NomeFile + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
-            NomeFile = NomeFile + Immagine.Model+ "-" + Immagine.Brand + "-" + Immagine.Lens;
-            NomeFile = NomeFile + Path
-            */
-
-                
-
-            // x.Name = await service.UploadFileMulti(request);
-
-            //  Console.WriteLine($"ciao { x.Name }   <----");
-            // await service.AddAsync(request);
-
-            /// Aggiunger
-
-
+            //La procedura Fa salva l immagine Poi restitutisce il nome del fali secondo 
+            // la convenzione
             string FileSalvato = await service.UploadFileMulti(request);
+            
 
+             Image Immagine = mapper.Map<Image>(request);
+            Immagine.File_Name = FileSalvato;
 
-            var ImageObj = mapper.Map<Image>(request);
-            ImageObj.File_Name = FileSalvato;
-            // string FileSalvato =  service.UploadFileMulti(request.File);
-            // converzione stringa
 
 
             //restitutisce lestenzione della figura +++Aggiouger
-            ImageObj.Format = Path.GetExtension(request.File.FileName);
+            Immagine.Format = Path.GetExtension(request.File.FileName);
 
 
             //++Aggiunger
-            ImageObj.Size = request.File.Length / 1024;// IList risultato saqrà esperesso in kb
+            Immagine.Size = request.File.Length / 1024;// IList risultato saqrà esperesso in kb
 
             // imposta lo stato a uploaded
-            ImageObj.State = _State.uploaded;
+            Immagine.State = _State.uploaded;
             // per ottenere inveve il risultato in mega nitr    1024*1024 ;
             // Non lo prendere
-            //service.AddAsync(ImageObj);
 
-            service.Add(ImageObj);
+            service.Add(Immagine);
+
+            
             return Ok();
+            
         }
 
 

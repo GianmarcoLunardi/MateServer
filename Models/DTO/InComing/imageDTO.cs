@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MakeSense.Models.DTO.InComing
 {
-    public class imageIn
+    /*
+    public class imageInDTO
     {
 
         public _State? State { get; set; }
@@ -26,4 +27,6 @@ namespace MakeSense.Models.DTO.InComing
         public int? Size { get; set; }
 
     }
+
+    */
 }
